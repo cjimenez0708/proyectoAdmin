@@ -40,13 +40,13 @@ export function Evaluaciones() {
     <>
       <PageHead
         titulo="Verificación"
-        subtitulo="Cada aplicación de la herramienta califica los 39 enunciados como «Cumple», «No cumple» o pendiente, con base en evidencia de la clínica."
+        subtitulo="Cada verificación califica los 39 requisitos como «Cumple», «No cumple» o pendiente, con base en evidencia de la clínica."
       />
       <div className="grid grid-2" style={{ alignItems: 'start' }}>
         <form className="card stack" onSubmit={crear}>
-          <h2>Nueva aplicación</h2>
+          <h2>Nueva verificación</h2>
           <label className="field">
-            Momento de aplicación
+            Etapa
             <select className="input" value={etapa} onChange={(e) => setEtapa(e.target.value as Etapa)}>
               {(Object.keys(ETAPAS) as Etapa[]).map((k) => (
                 <option key={k} value={k}>
@@ -66,7 +66,7 @@ export function Evaluaciones() {
           </label>
           {datos.length > 0 && (
             <label className="field">
-              Partir de una aplicación anterior
+              Partir de una verificación anterior
               <select className="input" value={baseId} onChange={(e) => setBaseId(e.target.value)}>
                 <option value="">No, empezar con todo pendiente</option>
                 {datos.map((d) => (
@@ -84,13 +84,13 @@ export function Evaluaciones() {
         </form>
 
         <div className="card">
-          <h2>Aplicaciones registradas</h2>
+          <h2>Verificaciones registradas</h2>
           {cargando ? (
             <Cargando />
           ) : error ? (
             <ErrorDatos mensaje={error} />
           ) : datos.length === 0 ? (
-            <p className="empty">Todavía no hay aplicaciones.</p>
+            <p className="empty">Todavía no hay verificaciones.</p>
           ) : (
             <div>
               {datos.map((ev) => {

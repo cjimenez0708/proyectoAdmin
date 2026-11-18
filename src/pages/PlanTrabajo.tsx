@@ -22,7 +22,7 @@ export function PlanTrabajo() {
     <>
       <PageHead
         titulo="Plan de trabajo"
-        subtitulo="Cada enunciado calificado como «No cumple» se convierte en una acción correctiva con responsable, recursos y fecha de cumplimiento (17.1)."
+        subtitulo="Acciones correctivas para cada requisito que no se cumple, con responsable, recursos y fecha de cumplimiento."
       />
       {!ev ? (
         <div className="card empty">
@@ -54,7 +54,7 @@ export function PlanTrabajo() {
                 <thead>
                   <tr>
                     <th>Área</th>
-                    <th>Enunciado</th>
+                    <th>Requisito</th>
                     <th>Acción correctiva</th>
                     <th>Responsable</th>
                     <th>Recursos</th>

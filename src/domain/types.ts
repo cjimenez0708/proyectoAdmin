@@ -5,7 +5,6 @@ export type AreaId = 'mercado' | 'marca' | 'tecnico' | 'organizacional' | 'legal
 export interface Area {
   id: AreaId;
   nombre: string;
-  apartado: string;
 }
 
 export interface Enunciado {

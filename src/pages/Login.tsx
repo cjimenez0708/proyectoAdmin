@@ -58,7 +58,7 @@ export function Login() {
         <img src="/logo.jpeg" alt="Clínica Preventiva Visual" />
         <div style={{ textAlign: 'center' }}>
           <h1>Spa Visual</h1>
-          <p className="muted small">{crear ? 'Crear usuario' : 'Herramienta de apoyo para la implementación'}</p>
+          <p className="muted small">{crear ? 'Crear usuario' : 'Gestión de la implementación'}</p>
         </div>
         <label className="field">
           Usuario

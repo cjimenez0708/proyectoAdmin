@@ -119,7 +119,7 @@ export function GraficoBarras({ datos }: { datos: [string, number][] }) {
         <div className="hbar" key={k}>
           <span>{k}</span>
           <Barra valor={v} />
-          <b>{v.toLocaleString('es-CR', { maximumFractionDigits: 1 })}%</b>
+          <b>{v.toLocaleString('es-CR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} %</b>
         </div>
       ))}
     </div>

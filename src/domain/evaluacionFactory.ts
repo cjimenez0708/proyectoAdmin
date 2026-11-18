@@ -4,7 +4,7 @@ import type { Etapa, NuevaEvaluacion, Respuesta } from './types';
 export const ETAPAS: Record<Etapa, { nombre: string; descripcion: string }> = {
   preparacion: {
     nombre: 'Preparación',
-    descripcion: 'Primera aplicación, durante la etapa de preparación (meses 1 y 2).',
+    descripcion: 'Primera verificación, durante la etapa de preparación (meses 1 y 2).',
   },
   prelanzamiento: {
     nombre: 'Antes del lanzamiento',

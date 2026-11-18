@@ -98,7 +98,7 @@ export const PROYECTO = {
     'Fortalecer la fidelización de los clientes actuales y atraer nuevos consumidores.',
   ],
   alcance:
-    'Propuesta de gestión de mercadeo para la creación de Spa Visual dentro de las instalaciones actuales en Curridabat, segundo semestre de 2026. La puesta en marcha, la compra de equipos, la remodelación y la ejecución de las acciones corresponden a decisiones de la clínica; el documento entrega las bases y herramientas para ejecutarlas y evaluarlas.',
+    'Spa Visual se implementa dentro de las instalaciones actuales de la clínica en Curridabat. La propuesta incluye el análisis del mercado, los requerimientos técnicos, organizacionales, legales y ambientales, una estimación financiera, las acciones de mercadeo y los criterios de seguimiento para su puesta en marcha.',
 };
 
 export interface Dato {
@@ -285,8 +285,6 @@ export const ORGANIZACIONAL = {
   figuraJuridica:
     'El spa opera bajo la Sociedad Anónima ya constituida (Óptica CSG S.A.), como una nueva línea de servicios, sin crear una entidad jurídica nueva.',
   capacitacion: 'Curso de Spa Visual especializado en ojo seco para 2 colaboradoras: ₡615 000 (₡307 500 por persona).',
-  notaContador:
-    'El contador no aparece en el organigrama: realiza la contabilidad ad honorem por ser esposo de la optometrista (dueña).',
 };
 
 export const LEGAL = [

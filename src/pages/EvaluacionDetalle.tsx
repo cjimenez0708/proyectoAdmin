@@ -79,7 +79,7 @@ export function EvaluacionDetalle() {
             <div className="stack">
               <NivelBadge nivel={r.nivel} />
               <p>
-                <strong>{r.cumple}</strong> de {r.total} enunciados cumplen.
+                <strong>{r.cumple}</strong> de {r.total} requisitos se cumplen.
               </p>
               <p className="small muted">
                 {r.noCumple} no cumplen y {r.pendiente} siguen pendientes de confirmar. Los pendientes cuentan en el total, pero no como cumplidos.
@@ -97,7 +97,7 @@ export function EvaluacionDetalle() {
           <div className="card-head">
             <div>
               <h2>{AREAS.find((a) => a.id === area)!.nombre}</h2>
-              <p className="small muted">Apartado {AREAS.find((a) => a.id === area)!.apartado} · califique con base en evidencia (documentos, cotizaciones, permisos, registros u observación directa).</p>
+              <p className="small muted">Califique cada requisito con base en evidencia: documentos, cotizaciones, permisos, registros u observación directa.</p>
             </div>
           </div>
           {enunciadosDeArea(area).map((e) => (

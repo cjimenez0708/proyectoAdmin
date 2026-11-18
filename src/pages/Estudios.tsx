@@ -8,7 +8,7 @@ export function Estudios() {
   const [tab, setTab] = useState<Tab>('mercado');
   return (
     <>
-      <PageHead titulo="Estudios" subtitulo="Resumen de los estudios del proyecto que sustentan los enunciados de la herramienta (apartados 10 a 16)." />
+      <PageHead titulo="Estudios" subtitulo="Estudios de mercado, técnico, organizacional, legal, ambiental y financiero de Spa Visual." />
       <Tabs
         activo={tab}
         onChange={setTab}
@@ -281,7 +281,6 @@ function Organizacional() {
               ))}
             </div>
           </div>
-          <p className="small muted section-gap">{ORGANIZACIONAL.notaContador}</p>
         </div>
         <div className="card stack">
           <h2>Procedimientos administrativos</h2>

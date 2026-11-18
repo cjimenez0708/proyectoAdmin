@@ -123,7 +123,7 @@ export function calcularIndicadores(r: RegistroMensual): ResultadoIndicador[] {
       id: 'ingreso',
       nombre: 'Ingreso promedio por sesión',
       formula: 'Ingresos del spa / sesiones realizadas',
-      meta: 'Igual o mayor al precio promedio definido (18.2), después de descuentos',
+      meta: 'Igual o mayor al precio promedio definido, después de descuentos',
       responsable: 'Secretaria (registro) · Optometrista y dueña (revisión)',
       valor: ingresoPromedio,
       unidad: '₡',

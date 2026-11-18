@@ -100,7 +100,7 @@ export function Indicadores() {
     <>
       <PageHead
         titulo="Indicadores de seguimiento"
-        subtitulo="Registro mensual para medir demanda, satisfacción, desempeño económico y avance (apartados 19.2 y 19.3)."
+        subtitulo="Registro mensual de la demanda, la satisfacción de los clientes y el desempeño económico del servicio."
       >
         <label className="field">
           Mes
@@ -169,7 +169,7 @@ export function Indicadores() {
           </table>
         </div>
         <p className="small muted section-gap">
-          El indicador «Cumplimiento de la herramienta de verificación» se calcula en la sección Verificación (meta: 80 % o más en cada área).
+          El cumplimiento de la verificación se consulta en el módulo Verificación (meta: 80 % o más en cada área).
         </p>
       </div>
 

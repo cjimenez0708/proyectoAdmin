@@ -5,11 +5,11 @@ import type { Area, AreaId, Enunciado } from './types';
  * "Proyecto Final – Gestión – II semestre 2026", apartados 17.2 a 17.4 (39 enunciados).
  */
 export const AREAS: Area[] = [
-  { id: 'mercado', nombre: 'Mercado y ventas', apartado: '17.2' },
-  { id: 'marca', nombre: 'Marca y gestión digital', apartado: '17.3' },
-  { id: 'tecnico', nombre: 'Aspectos técnicos', apartado: '17.4 a' },
-  { id: 'organizacional', nombre: 'Aspectos organizacionales', apartado: '17.4 b' },
-  { id: 'legal', nombre: 'Aspectos legales y ambientales', apartado: '17.4 c' },
+  { id: 'mercado', nombre: 'Mercado y ventas' },
+  { id: 'marca', nombre: 'Marca y gestión digital' },
+  { id: 'tecnico', nombre: 'Aspectos técnicos' },
+  { id: 'organizacional', nombre: 'Aspectos organizacionales' },
+  { id: 'legal', nombre: 'Aspectos legales y ambientales' },
 ];
 
 const TEXTOS: Record<AreaId, string[]> = {

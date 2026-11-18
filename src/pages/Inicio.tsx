@@ -19,7 +19,7 @@ export function Inicio() {
     <>
       <PageHead
         titulo="Spa Visual · Panel de implementación"
-        subtitulo="Lista de verificación para comprobar si la Clínica Preventiva Visual cuenta con las condiciones para ofrecer el servicio (apartado 17)."
+        subtitulo="Verificación de las condiciones de la Clínica Preventiva Visual para ofrecer el servicio Spa Visual."
       >
         <Link className="btn" to="/evaluaciones">
           Nueva verificación
@@ -30,8 +30,8 @@ export function Inicio() {
         <div className="card empty stack" style={{ alignItems: 'center' }}>
           <h2>Aún no hay verificaciones registradas</h2>
           <p>
-            La herramienta se aplica por primera vez en la etapa de preparación, de nuevo antes del lanzamiento y luego cada tres meses durante el primer
-            año.
+            La verificación se realiza durante la preparación, de nuevo antes del lanzamiento y luego cada tres meses durante el primer año de
+            operación.
           </p>
           <Link className="btn" to="/evaluaciones">
             Crear la primera verificación
@@ -65,7 +65,7 @@ export function Inicio() {
           )}
         </div>
         <div className="card">
-          <h2>Niveles de lectura</h2>
+          <h2>Niveles de preparación</h2>
           <div className="stack section-gap small">
             {(['lista', 'ajustes', 'no_preparada'] as const).map((n) => (
               <div key={n} className="row">

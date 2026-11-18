@@ -4,7 +4,7 @@ import { PLAN_MERCADEO } from '../content/documento';
 export function PlanMercadeo() {
   return (
     <>
-      <PageHead titulo="Plan de mercadeo e implementación" subtitulo="Acciones para la introducción de Spa Visual (apartado 18) y etapas de implementación (apartado 19.1)." />
+      <PageHead titulo="Plan de mercadeo e implementación" subtitulo="Etapas de implementación y acciones de mercadeo para la introducción de Spa Visual." />
       <div className="card table-wrap">
         <h2>Etapas de implementación</h2>
         <table className="section-gap">
