@@ -22,6 +22,18 @@ export function validarUsuario(u: string): string | null {
   return null;
 }
 
+/** Datos de la persona que se registra. Texto libre: solo se exige que no esté vacío. */
+export interface Perfil {
+  nombre: string;
+  puesto: string;
+}
+
+export function validarPerfil(p: Perfil): string | null {
+  if (!p.nombre.trim()) return 'Escriba su nombre.';
+  if (!p.puesto.trim()) return 'Escriba su puesto.';
+  return null;
+}
+
 export function validarClave(clave: string, confirmacion?: string): string | null {
   if (clave.length < CLAVE_MINIMA) return `La contraseña debe tener al menos ${CLAVE_MINIMA} caracteres.`;
   if (confirmacion !== undefined && clave !== confirmacion) return 'Las contraseñas no coinciden.';

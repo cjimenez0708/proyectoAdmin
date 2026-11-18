@@ -4,7 +4,7 @@ import { calcularResultado, clasificarNivel, listaParaLanzamiento, planDeTrabajo
 import { crearEvaluacion } from './evaluacionFactory';
 import { alertasConsecutivas, calcularIndicadores, registroVacio } from './indicadores';
 import type { Evaluacion, Respuesta } from './types';
-import { correoAUsuario, usuarioACorreo, validarClave, validarUsuario } from './usuario';
+import { correoAUsuario, usuarioACorreo, validarClave, validarPerfil, validarUsuario } from './usuario';
 
 const todas = (estado: Respuesta['estado']) =>
   Object.fromEntries(ENUNCIADOS.map((e) => [e.id, { estado, evidencia: '' }]));
@@ -80,6 +80,12 @@ describe('usuario y contraseña', () => {
     expect(validarClave('123456')).toBeNull();
     expect(validarClave('123456', '123457')).toBe('Las contraseñas no coinciden.');
     expect(validarClave('123456', '123456')).toBeNull();
+  });
+
+  it('nombre y puesto: texto libre pero no vacío', () => {
+    expect(validarPerfil({ nombre: '  ', puesto: 'Secretaria' })).toBe('Escriba su nombre.');
+    expect(validarPerfil({ nombre: 'Ana', puesto: '' })).toBe('Escriba su puesto.');
+    expect(validarPerfil({ nombre: 'María José Ñuñez', puesto: 'Optometrista y dueña' })).toBeNull();
   });
 
   it('valida el usuario y lo normaliza', () => {

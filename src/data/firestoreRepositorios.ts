@@ -14,7 +14,8 @@ import {
 import type { Evaluacion, NuevaEvaluacion, RegistroMensual } from '../domain/types';
 import { registroVacio } from '../domain/indicadores';
 import { firebase } from './firebase';
-import type { EvaluacionRepository, IndicadorRepository } from './repositorios';
+import type { Perfil } from '../domain/usuario';
+import type { EvaluacionRepository, IndicadorRepository, UsuarioRepository } from './repositorios';
 
 /**
  * Implementaciones en Cloud Firestore.
@@ -23,12 +24,14 @@ import type { EvaluacionRepository, IndicadorRepository } from './repositorios';
  *  evaluaciones/{id}   → { nombre, etapa, fecha, creadoPor, creadoEn, actualizadoEn, actualizadoPor,
  *                          respuestas: { [enunciadoId]: { estado, evidencia, accion? } } }
  *  indicadores/{AAAA-MM} → registro mensual de los indicadores de seguimiento (19.2)
+ *  usuarios/{uid}      → { usuario, nombre, puesto, creadoEn } de cada persona registrada
  *
  * Las 39 respuestas viven dentro del documento de la evaluación: una sola lectura
  * trae la evaluación completa y cada cambio es una actualización puntual por campo.
  */
 const EVALUACIONES = 'evaluaciones';
 const INDICADORES = 'indicadores';
+const USUARIOS = 'usuarios';
 
 const aEvaluacion = (id: string, d: DocumentData): Evaluacion => ({
   id,
@@ -83,6 +86,29 @@ export class FirestoreEvaluacionRepository implements EvaluacionRepository {
 
   async eliminar(id: string) {
     await deleteDoc(doc(this.db, EVALUACIONES, id));
+  }
+}
+
+export class FirestoreUsuarioRepository implements UsuarioRepository {
+  private get db() {
+    return firebase().db;
+  }
+
+  async guardarPerfil(uid: string, usuario: string, perfil: Perfil) {
+    await setDoc(doc(this.db, USUARIOS, uid), {
+      usuario,
+      nombre: perfil.nombre.trim(),
+      puesto: perfil.puesto.trim(),
+      creadoEn: serverTimestamp(),
+    });
+  }
+
+  observarPerfil(uid: string, cb: (p: Perfil | null) => void, onError: (e: Error) => void) {
+    return onSnapshot(
+      doc(this.db, USUARIOS, uid),
+      (d) => cb(d.exists() ? { nombre: d.data().nombre, puesto: d.data().puesto } : null),
+      onError,
+    );
   }
 }
 

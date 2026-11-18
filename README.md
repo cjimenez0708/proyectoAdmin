@@ -4,23 +4,10 @@ Aplicación web para la **Clínica Preventiva Visual** (Óptica CSG S.A.). Es la
 **herramienta de apoyo para la implementación** de Spa Visual, descrita en el apartado 17 del trabajo
 *Proyecto Final – Gestión – II semestre 2026* (Grupo 01, TEC). Toma como referencia de formato el Excel de ejemplo de Aqua Mascotas.
 
-## Qué hace
-
-| Módulo | Fuente en el documento | Descripción |
-|---|---|---|
-| **Verificación** | 17.1 – 17.4 | 39 enunciados en 5 áreas (mercado y ventas, marca y gestión digital, técnico, organizacional, legal y ambiental). Cada uno se califica **Cumple / No cumple / Pendiente**, con evidencia. |
-| **Cumplimiento** | 17.1 | % por área (cumplen ÷ total del área) y % general. Niveles: **≥ 80 %** lista · **60–79 %** avanzar con ajustes · **< 60 %** no preparada. |
-| **Condición de lanzamiento** | 19.1 | 80 % o más en cada área + habilitación sanitaria aprobada. |
-| **Plan de trabajo** | 17.1 | Cada «No cumple» registra acción correctiva, responsable, recursos y fecha de cumplimiento. |
-| **Verificaciones por etapa** | 17.1, 19.3 | Preparación, antes del lanzamiento y seguimiento trimestral. Una verificación nueva puede partir de una anterior. |
-| **Acceso** | — | Usuario y contraseña (mínimo 6 caracteres) y registro de usuarios con confirmación de contraseña. |
-| **Indicadores de seguimiento** | 19.2, 19.3 | Registro mensual: sesiones, ocupación, conversión, retorno, satisfacción, ingreso promedio, presupuesto, canales y reseñas, con sus metas. Alerta cuando un indicador falla **dos meses consecutivos** y muestra la acción correctiva del área. |
-| **Información** | 1–16, 18 | Empresa, proyecto, estudios (mercado, técnico, organizacional, legal, ambiental, financiero) y plan de mercadeo, en modo de solo lectura. |
-
 ## Tecnología
 
 - React 19 + TypeScript + Vite
-- Firebase Authentication (correo y contraseña) y Cloud Firestore
+- Firebase Authentication (usuario y contraseña) y Cloud Firestore
 - Vitest para las pruebas del dominio
 
 ## Diagramas
@@ -47,9 +34,9 @@ src/
 
 | Patrón | Dónde | Por qué |
 |---|---|---|
-| **Repository** | `data/repositorios.ts`, `data/firestoreRepositorios.ts` | La UI depende de interfaces (`EvaluacionRepository`, `IndicadorRepository`), no de Firestore. Se puede cambiar el almacenamiento o probar con datos en memoria. |
+| **Repository** | `data/repositorios.ts`, `data/firestoreRepositorios.ts` | La UI depende de interfaces (`EvaluacionRepository`, `IndicadorRepository`, `UsuarioRepository`), no de Firestore. Se puede cambiar el almacenamiento o probar con datos en memoria. |
 | **Singleton** | `data/firebase.ts` | Una sola instancia de App, Auth y Firestore. |
-| **Factory** | `domain/evaluacionFactory.ts` | Crea una aplicación con los 39 enunciados del catálogo, ya sea vacía o copiando una aplicación anterior. |
+| **Factory** | `domain/evaluacionFactory.ts` | Crea una verificación con los 39 requisitos del catálogo, ya sea vacía o copiando una verificación anterior. |
 | **Observer** | `data/hooks.ts` (`onSnapshot`) | Las pantallas se actualizan en tiempo real si otra persona (p. ej., la secretaria) edita la evidencia. |
 | **Inyección de dependencias / Provider** | `RepositoriosContext`, `AuthContext` | Los componentes reciben los repositorios y la sesión por contexto en lugar de crearlos. |
 | **Tabla de umbrales** | `domain/cumplimiento.ts` (`UMBRALES`) | Los niveles 80/60 se definen en un solo lugar. |
@@ -68,10 +55,14 @@ indicadores/{AAAA-MM}
   clientesPrimeraVez, clientesSegundaSesion60d, encuestasRespondidas, encuestasCon4o5, ingresos,
   precioPromedioDefinido, gastoReal, gastoPresupuestado, nuevosConsulta, nuevosRedes,
   nuevosReferidos, nuevosAlianzas, resenasGoogle
+
+usuarios/{uid}
+  usuario, nombre, puesto, creadoEn
 ```
 
-Las 39 respuestas se guardan dentro del documento de la evaluación. Así, una sola lectura trae la evaluación completa y cada cambio actualiza solo su campo (`respuestas.MV-1`).
+Las 39 respuestas se guardan dentro del documento de la verificación. Así, una sola lectura trae la verificación completa y cada cambio actualiza solo su campo (`respuestas.MV-1`).
 Las reglas de seguridad (`firestore.rules`) permiten leer y escribir solo a usuarios autenticados y validan la estructura.
+Cada persona solo puede escribir su propio perfil en `usuarios`.
 
 ## Ejecutar en local
 
@@ -83,14 +74,6 @@ cp .env.example .env.local   # completar con la configuración web de Firebase
 npm run dev                  # http://localhost:5180
 ```
 
-### Acceso
-
-En la pantalla de inicio se usa **usuario y contraseña** (sin correo). El botón **Crear usuario** pide el usuario,
-la contraseña (mínimo 6 caracteres) y la contraseña repetida, que debe ser idéntica.
-El usuario admite letras, números, punto, guion y guion bajo (3 a 30 caracteres). Como Firebase Authentication
-requiere un correo, el usuario se convierte internamente en `usuario@usuarios.proyectoadmin-46d4e.firebaseapp.com`.
-No se envía ningún correo.
-
 Otros comandos:
 
 ```bash
@@ -98,11 +81,14 @@ npm test          # pruebas del dominio (Vitest)
 npm run build     # compilación de producción en dist/
 ```
 
-## Publicar en línea (siguiente paso)
+## Acceso
 
-El proyecto ya incluye `firebase.json` para Firebase Hosting:
+En la pantalla de inicio se usa **usuario y contraseña** (sin correo). El botón **Crear usuario** pide:
 
-```bash
-npm run build
-npx firebase-tools deploy --only hosting,firestore:rules
-```
+- **Nombre** y **puesto** de la persona (texto libre; solo no pueden quedar vacíos).
+- **Usuario**: letras, números, punto, guion y guion bajo (3 a 30 caracteres).
+- **Contraseña** (mínimo 6 caracteres) y la **contraseña repetida**, que debe ser idéntica.
+
+El nombre y el puesto se guardan en `usuarios/{uid}` y se muestran en el menú lateral. Como Firebase Authentication
+requiere un correo, el usuario se convierte internamente en `usuario@usuarios.proyectoadmin-46d4e.firebaseapp.com`.
+No se envía ningún correo.

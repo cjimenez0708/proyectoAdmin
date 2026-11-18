@@ -1,4 +1,5 @@
 import type { Evaluacion, NuevaEvaluacion, RegistroMensual, Respuesta } from '../domain/types';
+import type { Perfil } from '../domain/usuario';
 
 /** Función para cancelar una suscripción en tiempo real (patrón Observer). */
 export type Cancelar = () => void;
@@ -14,6 +15,11 @@ export interface EvaluacionRepository {
   actualizarRespuesta(id: string, enunciadoId: string, respuesta: Respuesta, usuario: string): Promise<void>;
   renombrar(id: string, nombre: string): Promise<void>;
   eliminar(id: string): Promise<void>;
+}
+
+export interface UsuarioRepository {
+  guardarPerfil(uid: string, usuario: string, perfil: Perfil): Promise<void>;
+  observarPerfil(uid: string, cb: (p: Perfil | null) => void, onError: (e: Error) => void): Cancelar;
 }
 
 export interface IndicadorRepository {

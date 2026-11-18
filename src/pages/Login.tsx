@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useAuth } from '../auth/AuthContext';
-import { validarClave, validarUsuario } from '../domain/usuario';
+import { validarClave, validarPerfil, validarUsuario } from '../domain/usuario';
 
 const MENSAJES: Record<string, string> = {
   'auth/invalid-credential': 'Usuario o contraseña incorrectos.',
@@ -17,6 +17,8 @@ type Modo = 'ingresar' | 'crear';
 export function Login() {
   const { ingresar, registrar } = useAuth();
   const [modo, setModo] = useState<Modo>('ingresar');
+  const [nombre, setNombre] = useState('');
+  const [puesto, setPuesto] = useState('');
   const [usuario, setUsuario] = useState('');
   const [clave, setClave] = useState('');
   const [confirmacion, setConfirmacion] = useState('');
@@ -35,14 +37,15 @@ export function Login() {
   async function enviar(e: FormEvent) {
     e.preventDefault();
     setError('');
-    const invalido = validarUsuario(usuario) ?? validarClave(clave, crear ? confirmacion : undefined);
+    const invalido =
+      (crear ? validarPerfil({ nombre, puesto }) : null) ?? validarUsuario(usuario) ?? validarClave(clave, crear ? confirmacion : undefined);
     if (invalido) {
       setError(invalido);
       return;
     }
     setEnviando(true);
     try {
-      if (crear) await registrar(usuario, clave);
+      if (crear) await registrar(usuario, clave, { nombre, puesto });
       else await ingresar(usuario, clave);
     } catch (err) {
       const code = (err as { code?: string }).code ?? '';
@@ -60,6 +63,18 @@ export function Login() {
           <h1>Spa Visual</h1>
           <p className="muted small">{crear ? 'Crear usuario' : 'Gestión de la implementación'}</p>
         </div>
+        {crear && (
+          <>
+            <label className="field">
+              Nombre
+              <input className="input" autoComplete="name" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+            </label>
+            <label className="field">
+              Puesto
+              <input className="input" autoComplete="organization-title" value={puesto} onChange={(e) => setPuesto(e.target.value)} />
+            </label>
+          </>
+        )}
         <label className="field">
           Usuario
           <input

@@ -44,7 +44,7 @@
   <!-- Casos de uso -->
   <g fill="#ffffff" stroke="#1aa3c8" stroke-width="2">
     <ellipse cx="550" cy="130" rx="150" ry="25"/>
-    <ellipse cx="550" cy="196" rx="150" ry="25"/>
+    <ellipse cx="550" cy="196" rx="170" ry="25"/>
     <ellipse cx="550" cy="262" rx="170" ry="25"/>
     <ellipse cx="450" cy="328" rx="150" ry="25"/>
     <ellipse cx="680" cy="396" rx="150" ry="25"/>
@@ -57,7 +57,7 @@
   </g>
   <g text-anchor="middle" fill="#1b2433">
     <text x="550" y="135">CU-01 Iniciar sesión</text>
-    <text x="550" y="201">CU-02 Crear usuario</text>
+    <text x="550" y="201">CU-02 Crear usuario (nombre, puesto)</text>
     <text x="550" y="267">CU-03 Crear verificación</text>
     <text x="450" y="333">CU-04 Calificar requisito</text>
     <text x="680" y="401">CU-05 Registrar evidencia</text>

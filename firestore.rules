@@ -32,6 +32,18 @@ service cloud.firestore {
         && request.resource.data.mes == mes;
     }
 
+    // usuarios/{uid}: nombre y puesto de cada persona; cada quien escribe solo su propio perfil
+    match /usuarios/{uid} {
+      allow read: if autenticado();
+      allow create, update: if autenticado()
+        && request.auth.uid == uid
+        && request.resource.data.nombre is string
+        && request.resource.data.nombre.trim().size() > 0
+        && request.resource.data.puesto is string
+        && request.resource.data.puesto.trim().size() > 0;
+      allow delete: if false;
+    }
+
     // Todo lo demás queda bloqueado.
     match /{document=**} {
       allow read, write: if false;
