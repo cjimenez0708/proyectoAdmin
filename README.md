@@ -56,7 +56,7 @@ indicadores/{AAAA-MM}
   mes, mesOperacion, sesionesRealizadas, sesionesDisponibles, pacientesRecomendados, pacientesAgendaron,
   clientesPrimeraVez, clientesSegundaSesion60d, encuestasRespondidas, encuestasCon4o5, ingresos,
   precioPromedioDefinido, gastoReal, gastoPresupuestado, nuevosConsulta, nuevosRedes,
-  nuevosReferidos, nuevosAlianzas, resenasGoogle
+  nuevosReferidos, nuevosAlianzas, resenasGoogle, actualizadoEn, actualizadoPor
 
 usuarios/{uid}
   usuario, nombre, puesto, creadoEn
