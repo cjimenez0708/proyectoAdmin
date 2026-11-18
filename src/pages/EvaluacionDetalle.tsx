@@ -49,7 +49,7 @@ export function EvaluacionDetalle() {
 
   return (
     <>
-      <PageHead titulo={ev.nombre} subtitulo={`${ETAPAS[ev.etapa].nombre} · ${ev.fecha} · creada por ${ev.creadoPor}`}>
+      <PageHead titulo={ev.nombre} subtitulo={`${ev.nombre.startsWith(ETAPAS[ev.etapa].nombre) ? '' : `${ETAPAS[ev.etapa].nombre} · ${ev.fecha} · `}Creada por ${ev.creadoPor}`}>
         <button className="btn danger" onClick={eliminar}>
           Eliminar
         </button>

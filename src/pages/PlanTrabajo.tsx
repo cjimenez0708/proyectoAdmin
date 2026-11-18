@@ -68,7 +68,7 @@ export function PlanTrabajo() {
                     return (
                       <tr key={enunciado.id}>
                         <td className="small">{areaPorId(enunciado.area).nombre}</td>
-                        <td>
+                        <td style={{ minWidth: 240 }}>
                           <Link to={`/evaluaciones/${ev.id}`} className="small">
                             {enunciado.numero}. {enunciado.texto}
                           </Link>

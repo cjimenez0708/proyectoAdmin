@@ -126,7 +126,9 @@ export function Indicadores() {
         </div>
       ))}
 
-      <div className="card">
+      {/* El formulario se muestra primero (order: -1) y los resultados debajo. */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div className="card" style={{ marginTop: 0 }}>
         <div className="card-head">
           <h2>Resultados de {mes}</h2>
           {!existente && <span className="badge neutral">Sin guardar</span>}
@@ -171,7 +173,7 @@ export function Indicadores() {
         </p>
       </div>
 
-      <form className="card" onSubmit={guardar}>
+      <form className="card" onSubmit={guardar} style={{ order: -1, marginTop: 0 }}>
         <div className="card-head">
           <h2>Datos del mes</h2>
           <div className="row">
@@ -211,6 +213,7 @@ export function Indicadores() {
           ))}
         </div>
       </form>
+      </div>
     </>
   );
 }

@@ -42,12 +42,14 @@ export function calcularIndicadores(r: RegistroMensual): ResultadoIndicador[] {
   const consolidacion = r.mesOperacion >= 10;
   const metaSesiones = consolidacion ? 50 : 36;
   const metaOcupacion = consolidacion ? 75 : 55;
+  // Un mes sin sesiones realizadas ni disponibles se considera sin datos (no "fuera de meta").
+  const sinSesiones = r.sesionesRealizadas === 0 && r.sesionesDisponibles === 0;
 
   const ocupacion = pct(r.sesionesRealizadas, r.sesionesDisponibles);
   const conversion = pct(r.pacientesAgendaron, r.pacientesRecomendados);
   const retorno = pct(r.clientesSegundaSesion60d, r.clientesPrimeraVez);
   const satisfaccion = pct(r.encuestasCon4o5, r.encuestasRespondidas);
-  const ingresoPromedio = r.sesionesRealizadas > 0 ? Math.round(r.ingresos / r.sesionesRealizadas) : null;
+  const ingresoPromedio = r.sesionesRealizadas > 0 && r.ingresos > 0 ? Math.round(r.ingresos / r.sesionesRealizadas) : null;
   const presupuesto = pct(r.gastoReal, r.gastoPresupuestado);
 
   const canales: [string, number][] = [
@@ -68,9 +70,9 @@ export function calcularIndicadores(r: RegistroMensual): ResultadoIndicador[] {
       formula: 'Número de sesiones atendidas en el mes',
       meta: '36 o más por mes en los primeros seis meses; 50 o más desde el mes 10',
       responsable: 'Secretaria (registro) · Optometrista y dueña (revisión)',
-      valor: r.sesionesRealizadas,
+      valor: sinSesiones ? null : r.sesionesRealizadas,
       unidad: '',
-      cumple: r.sesionesRealizadas >= metaSesiones,
+      cumple: sinSesiones ? null : r.sesionesRealizadas >= metaSesiones,
       grupo: 'demanda',
     },
     {

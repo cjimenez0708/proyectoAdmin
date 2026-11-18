@@ -95,7 +95,8 @@ function Resumen({ ev }: { ev: ReturnType<typeof useEvaluaciones>['datos'][numbe
           <div>
             <h2>Última verificación</h2>
             <p className="small muted">
-              <Link to={`/evaluaciones/${ev.id}`}>{ev.nombre}</Link> · {ETAPAS[ev.etapa].nombre} · {ev.fecha}
+              <Link to={`/evaluaciones/${ev.id}`}>{ev.nombre}</Link>
+              {!ev.nombre.startsWith(ETAPAS[ev.etapa].nombre) && <> · {ETAPAS[ev.etapa].nombre} · {ev.fecha}</>}
             </p>
           </div>
           <NivelBadge nivel={r.nivel} />
