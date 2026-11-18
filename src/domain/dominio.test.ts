@@ -4,6 +4,7 @@ import { calcularResultado, clasificarNivel, listaParaLanzamiento, planDeTrabajo
 import { crearEvaluacion } from './evaluacionFactory';
 import { alertasConsecutivas, calcularIndicadores, registroVacio } from './indicadores';
 import type { Evaluacion, Respuesta } from './types';
+import { correoAUsuario, usuarioACorreo, validarClave, validarUsuario } from './usuario';
 
 const todas = (estado: Respuesta['estado']) =>
   Object.fromEntries(ENUNCIADOS.map((e) => [e.id, { estado, evidencia: '' }]));
@@ -70,6 +71,23 @@ describe('factory y plan de trabajo', () => {
     ev.respuestas['TE-3'] = { estado: 'no_cumple', evidencia: '' };
     ev.respuestas['MV-1'] = { estado: 'cumple', evidencia: '' };
     expect(planDeTrabajo(ev).map((i) => i.enunciado.id)).toEqual(['TE-3']);
+  });
+});
+
+describe('usuario y contraseña', () => {
+  it('contraseña mínima de 6 y confirmación idéntica', () => {
+    expect(validarClave('12345')).not.toBeNull();
+    expect(validarClave('123456')).toBeNull();
+    expect(validarClave('123456', '123457')).toBe('Las contraseñas no coinciden.');
+    expect(validarClave('123456', '123456')).toBeNull();
+  });
+
+  it('valida el usuario y lo normaliza', () => {
+    expect(validarUsuario('ab')).not.toBeNull();
+    expect(validarUsuario('con espacio')).not.toBeNull();
+    expect(validarUsuario('María')).not.toBeNull();
+    expect(validarUsuario('  Secretaria ')).toBeNull();
+    expect(correoAUsuario(usuarioACorreo('  Secretaria '))).toBe('secretaria');
   });
 });
 

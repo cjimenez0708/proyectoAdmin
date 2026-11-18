@@ -24,7 +24,7 @@ const NAV = [
 ];
 
 export function Layout() {
-  const { usuario, salir } = useAuth();
+  const { nombre, salir } = useAuth();
   const [abierto, setAbierto] = useState(false);
   const { pathname } = useLocation();
   useEffect(() => setAbierto(false), [pathname]);
@@ -57,7 +57,7 @@ export function Layout() {
           </nav>
         ))}
         <div className="sidebar-foot">
-          <span>{usuario?.email}</span>
+          <span>Usuario: {nombre}</span>
           <button className="btn ghost" onClick={() => salir()}>
             Cerrar sesión
           </button>

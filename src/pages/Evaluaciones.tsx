@@ -13,7 +13,7 @@ const hoy = () => new Date().toLocaleDateString('en-CA');
 export function Evaluaciones() {
   const { datos, cargando, error } = useEvaluaciones();
   const { evaluaciones } = useRepositorios();
-  const { usuario } = useAuth();
+  const { nombre: usuarioActual } = useAuth();
   const navigate = useNavigate();
   const [etapa, setEtapa] = useState<Etapa>('preparacion');
   const [fecha, setFecha] = useState(hoy());
@@ -28,7 +28,7 @@ export function Evaluaciones() {
     setErrorForm('');
     try {
       const base = datos.find((d) => d.id === baseId)?.respuestas;
-      const id = await evaluaciones.crear(crearEvaluacion({ etapa, fecha, nombre, creadoPor: usuario?.email ?? '', base }));
+      const id = await evaluaciones.crear(crearEvaluacion({ etapa, fecha, nombre, creadoPor: usuarioActual, base }));
       navigate(`/evaluaciones/${id}`);
     } catch (err) {
       setErrorForm((err as Error).message);

@@ -62,7 +62,7 @@ function formatear(i: ResultadoIndicador) {
 export function Indicadores() {
   const { datos, cargando, error } = useIndicadores();
   const { indicadores } = useRepositorios();
-  const { usuario } = useAuth();
+  const { nombre } = useAuth();
   const [mes, setMes] = useState(mesActual());
   const [form, setForm] = useState<RegistroMensual>(registroVacio(mesActual()));
   const [estado, setEstado] = useState('');
@@ -80,7 +80,7 @@ export function Indicadores() {
     e.preventDefault();
     setEstado('Guardando…');
     try {
-      await indicadores.guardar({ ...form, id: mes, mes }, usuario?.email ?? '');
+      await indicadores.guardar({ ...form, id: mes, mes }, nombre);
       setEstado('Guardado');
     } catch (err) {
       setEstado(`Error: ${(err as Error).message}`);

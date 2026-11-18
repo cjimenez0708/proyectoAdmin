@@ -21,7 +21,7 @@ export function EvaluacionDetalle() {
   const { id } = useParams();
   const { datos: ev, cargando, error } = useEvaluacion(id);
   const { evaluaciones } = useRepositorios();
-  const { usuario } = useAuth();
+  const { nombre } = useAuth();
   const navigate = useNavigate();
   const [area, setArea] = useState<AreaId | 'resumen'>('resumen');
   const [errorGuardar, setErrorGuardar] = useState('');
@@ -35,7 +35,7 @@ export function EvaluacionDetalle() {
   const guardar = async (enunciadoId: string, resp: Respuesta) => {
     setErrorGuardar('');
     try {
-      await evaluaciones.actualizarRespuesta(ev.id, enunciadoId, resp, usuario?.email ?? '');
+      await evaluaciones.actualizarRespuesta(ev.id, enunciadoId, resp, nombre);
     } catch (e) {
       setErrorGuardar((e as Error).message);
     }

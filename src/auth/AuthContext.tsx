@@ -1,11 +1,15 @@
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut, type User } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, type User } from 'firebase/auth';
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { firebase } from '../data/firebase';
+import { correoAUsuario, usuarioACorreo } from '../domain/usuario';
 
 interface AuthValue {
   usuario: User | null;
+  /** Nombre de usuario de la sesión actual (sin el dominio técnico). */
+  nombre: string;
   cargando: boolean;
-  ingresar: (correo: string, clave: string) => Promise<void>;
+  ingresar: (usuario: string, clave: string) => Promise<void>;
+  registrar: (usuario: string, clave: string) => Promise<void>;
   salir: () => Promise<void>;
 }
 
@@ -26,9 +30,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const value: AuthValue = {
     usuario,
+    nombre: correoAUsuario(usuario?.email),
     cargando,
-    ingresar: async (correo, clave) => {
-      await signInWithEmailAndPassword(firebase().auth, correo, clave);
+    ingresar: async (u, clave) => {
+      await signInWithEmailAndPassword(firebase().auth, usuarioACorreo(u), clave);
+    },
+    registrar: async (u, clave) => {
+      await createUserWithEmailAndPassword(firebase().auth, usuarioACorreo(u), clave);
     },
     salir: () => signOut(firebase().auth),
   };

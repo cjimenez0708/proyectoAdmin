@@ -82,7 +82,13 @@ cp .env.example .env.local   # completar con la configuración web de Firebase
 npm run dev                  # http://localhost:5180
 ```
 
-Las cuentas de acceso se crean en **Firebase Console → Authentication → Usuarios → Agregar usuario**.
+### Acceso
+
+En la pantalla de inicio se usa **usuario y contraseña** (sin correo). El botón **Crear usuario** pide el usuario,
+la contraseña (mínimo 6 caracteres) y la contraseña repetida, que debe ser idéntica.
+El usuario admite letras, números, punto, guion y guion bajo (3 a 30 caracteres). Como Firebase Authentication
+requiere un correo, el usuario se convierte internamente en `usuario@usuarios.proyectoadmin-46d4e.firebaseapp.com`.
+No se envía ningún correo.
 
 Otros comandos:
 
