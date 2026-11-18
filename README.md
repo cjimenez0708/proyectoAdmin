@@ -12,7 +12,8 @@ Aplicación web para la **Clínica Preventiva Visual** (Óptica CSG S.A.). Es la
 | **Cumplimiento** | 17.1 | % por área (cumplen ÷ total del área) y % general. Niveles: **≥ 80 %** lista · **60–79 %** avanzar con ajustes · **< 60 %** no preparada. |
 | **Condición de lanzamiento** | 19.1 | 80 % o más en cada área + habilitación sanitaria aprobada. |
 | **Plan de trabajo** | 17.1 | Cada «No cumple» registra acción correctiva, responsable, recursos y fecha de cumplimiento. |
-| **Aplicaciones** | 17.1, 19.3 | Preparación, antes del lanzamiento y seguimiento trimestral. Una aplicación nueva puede partir de una anterior. |
+| **Verificaciones por etapa** | 17.1, 19.3 | Preparación, antes del lanzamiento y seguimiento trimestral. Una verificación nueva puede partir de una anterior. |
+| **Acceso** | — | Usuario y contraseña (mínimo 6 caracteres) y registro de usuarios con confirmación de contraseña. |
 | **Indicadores de seguimiento** | 19.2, 19.3 | Registro mensual: sesiones, ocupación, conversión, retorno, satisfacción, ingreso promedio, presupuesto, canales y reseñas, con sus metas. Alerta cuando un indicador falla **dos meses consecutivos** y muestra la acción correctiva del área. |
 | **Información** | 1–16, 18 | Empresa, proyecto, estudios (mercado, técnico, organizacional, legal, ambiental, financiero) y plan de mercadeo, en modo de solo lectura. |
 

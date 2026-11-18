@@ -30,7 +30,7 @@
     <text x="92" y="182" font-size="11" fill="#1b2433">Inicio · Verificación · Detalle</text>
     <text x="92" y="198" font-size="11" fill="#1b2433">Plan de trabajo · Indicadores</text>
     <text x="92" y="214" font-size="11" fill="#1b2433">Empresa · Proyecto · Estudios</text>
-    <text x="92" y="230" font-size="11" fill="#1b2433">Plan de mercadeo · Login</text>
+    <text x="92" y="230" font-size="11" fill="#1b2433">Plan de mercadeo · Login / Crear usuario</text>
 
     <rect x="300" y="140" width="200" height="96" rx="8" fill="#dff2f8" stroke="#12396b"/>
     <use href="#icono" x="476" y="148"/>
@@ -53,7 +53,7 @@
   <rect x="80" y="320" width="200" height="80" rx="8" fill="#dff2f8" stroke="#12396b"/>
   <use href="#icono" x="256" y="328"/>
   <text x="92" y="342" font-weight="600" fill="#12396b">AuthContext</text>
-  <text x="92" y="362" font-size="11" fill="#1b2433">Sesión del usuario</text>
+  <text x="92" y="362" font-size="11" fill="#1b2433">Ingresar, crear usuario, salir</text>
   <text x="92" y="378" font-size="11" fill="#1b2433">«Provider»</text>
 
   <rect x="300" y="320" width="200" height="80" rx="8" fill="#dff2f8" stroke="#12396b"/>
@@ -69,14 +69,16 @@
   <text x="532" y="378" font-size="11" fill="#1b2433">de los repositorios</text>
 
   <!-- Dominio -->
-  <rect x="60" y="445" width="330" height="170" rx="10" fill="#ffffff" stroke="#1aa3c8" stroke-width="1.5"/>
+  <rect x="60" y="445" width="330" height="200" rx="10" fill="#ffffff" stroke="#1aa3c8" stroke-width="1.5"/>
   <text x="76" y="466" font-weight="700" fill="#1aa3c8">Dominio (domain/) · sin dependencias externas</text>
-  <text x="80" y="492" fill="#1b2433">• catalogo: 5 áreas, 39 enunciados (17.2–17.4)</text>
+  <text x="80" y="492" fill="#1b2433">• catalogo: 5 áreas, 39 requisitos</text>
   <text x="80" y="514" fill="#1b2433">• cumplimiento: % por área y general,</text>
   <text x="92" y="530" fill="#1b2433">niveles 80/60, condición de lanzamiento,</text>
   <text x="92" y="546" fill="#1b2433">plan de trabajo</text>
   <text x="80" y="568" fill="#1b2433">• evaluacionFactory «Factory»</text>
-  <text x="80" y="590" fill="#1b2433">• indicadores: metas 19.2, alertas 19.3</text>
+  <text x="80" y="590" fill="#1b2433">• indicadores: metas mensuales y alertas</text>
+  <text x="80" y="612" fill="#1b2433">• usuario: validación de usuario y</text>
+  <text x="92" y="628" fill="#1b2433">contraseña (mínimo 6, confirmación)</text>
 
   <!-- Datos -->
   <rect x="420" y="445" width="340" height="270" rx="10" fill="#ffffff" stroke="#1aa3c8" stroke-width="1.5"/>
@@ -101,7 +103,8 @@
   <text x="846" y="406" font-weight="700" fill="#a86400">«nube» Google Firebase</text>
   <rect x="850" y="430" width="200" height="80" rx="8" fill="#fff" stroke="#a86400"/>
   <text x="862" y="456" font-weight="600" fill="#1b2433">Firebase Authentication</text>
-  <text x="862" y="476" font-size="11" fill="#1b2433">Correo y contraseña</text>
+  <text x="862" y="476" font-size="11" fill="#1b2433">Usuario y contraseña</text>
+  <text x="862" y="492" font-size="10" fill="#5d6b7e">(correo técnico interno)</text>
   <rect x="850" y="530" width="200" height="160" rx="8" fill="#fff" stroke="#a86400"/>
   <text x="862" y="556" font-weight="600" fill="#1b2433">Cloud Firestore</text>
   <text x="862" y="578" font-size="11" fill="#1b2433">evaluaciones/{id}</text>
