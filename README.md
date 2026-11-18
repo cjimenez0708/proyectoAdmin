@@ -4,6 +4,8 @@ Aplicación web para la **Clínica Preventiva Visual** (Óptica CSG S.A.). Es la
 **herramienta de apoyo para la implementación** de Spa Visual, descrita en el apartado 17 del trabajo
 *Proyecto Final – Gestión – II semestre 2026* (Grupo 01, TEC). Toma como referencia de formato el Excel de ejemplo de Aqua Mascotas.
 
+**En línea:** https://spavisual-cpv.web.app
+
 ## Tecnología
 
 - React 19 + TypeScript + Vite
