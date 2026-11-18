@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 760" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13">
+  <rect width="1100" height="760" fill="#ffffff"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#12396b"/>
+    </marker>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#fff" stroke="#12396b"/>
+    </marker>
+    <g id="icono">
+      <rect x="0" y="0" width="16" height="12" fill="#fff" stroke="#12396b"/>
+      <rect x="-4" y="2" width="8" height="3" fill="#fff" stroke="#12396b"/>
+      <rect x="-4" y="7" width="8" height="3" fill="#fff" stroke="#12396b"/>
+    </g>
+  </defs>
+
+  <text x="550" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#12396b">Diagrama de componentes · Spa Visual</text>
+
+  <!-- Navegador -->
+  <rect x="30" y="60" width="760" height="670" rx="14" fill="#f4f9fc" stroke="#12396b" stroke-width="2"/>
+  <text x="50" y="86" font-weight="700" fill="#12396b">«dispositivo» Navegador web · SPA React + TypeScript (Vite)</text>
+
+  <!-- Capa de presentación -->
+  <rect x="60" y="105" width="700" height="150" rx="10" fill="#ffffff" stroke="#1aa3c8" stroke-width="1.5"/>
+  <text x="76" y="126" font-weight="700" fill="#1aa3c8">Capa de presentación</text>
+  <g>
+    <rect x="80" y="140" width="200" height="96" rx="8" fill="#dff2f8" stroke="#12396b"/>
+    <use href="#icono" x="256" y="148"/>
+    <text x="92" y="162" font-weight="600" fill="#12396b">Páginas (pages/)</text>
+    <text x="92" y="182" font-size="11" fill="#1b2433">Inicio · Verificación · Detalle</text>
+    <text x="92" y="198" font-size="11" fill="#1b2433">Plan de trabajo · Indicadores</text>
+    <text x="92" y="214" font-size="11" fill="#1b2433">Empresa · Proyecto · Estudios</text>
+    <text x="92" y="230" font-size="11" fill="#1b2433">Plan de mercadeo · Login</text>
+
+    <rect x="300" y="140" width="200" height="96" rx="8" fill="#dff2f8" stroke="#12396b"/>
+    <use href="#icono" x="476" y="148"/>
+    <text x="312" y="162" font-weight="600" fill="#12396b">Componentes UI</text>
+    <text x="312" y="182" font-size="11" fill="#1b2433">Layout · Medidor · Barra</text>
+    <text x="312" y="198" font-size="11" fill="#1b2433">NivelBadge · FilaArea · Tabs</text>
+    <text x="312" y="214" font-size="11" fill="#1b2433">(presentacionales, sin datos)</text>
+
+    <rect x="520" y="140" width="220" height="96" rx="8" fill="#dff2f8" stroke="#12396b"/>
+    <use href="#icono" x="716" y="148"/>
+    <text x="532" y="162" font-weight="600" fill="#12396b">Contenido (content/)</text>
+    <text x="532" y="182" font-size="11" fill="#1b2433">Datos del documento final:</text>
+    <text x="532" y="198" font-size="11" fill="#1b2433">empresa, estudios, mercadeo,</text>
+    <text x="532" y="214" font-size="11" fill="#1b2433">etapas (solo lectura)</text>
+  </g>
+
+  <!-- Capa de aplicación / estado -->
+  <rect x="60" y="285" width="700" height="130" rx="10" fill="#ffffff" stroke="#1aa3c8" stroke-width="1.5"/>
+  <text x="76" y="306" font-weight="700" fill="#1aa3c8">Estado y acceso a datos</text>
+  <rect x="80" y="320" width="200" height="80" rx="8" fill="#dff2f8" stroke="#12396b"/>
+  <use href="#icono" x="256" y="328"/>
+  <text x="92" y="342" font-weight="600" fill="#12396b">AuthContext</text>
+  <text x="92" y="362" font-size="11" fill="#1b2433">Sesión del usuario</text>
+  <text x="92" y="378" font-size="11" fill="#1b2433">«Provider»</text>
+
+  <rect x="300" y="320" width="200" height="80" rx="8" fill="#dff2f8" stroke="#12396b"/>
+  <use href="#icono" x="476" y="328"/>
+  <text x="312" y="342" font-weight="600" fill="#12396b">Hooks (data/hooks)</text>
+  <text x="312" y="362" font-size="11" fill="#1b2433">useEvaluaciones, useEvaluacion,</text>
+  <text x="312" y="378" font-size="11" fill="#1b2433">useIndicadores «Observer»</text>
+
+  <rect x="520" y="320" width="220" height="80" rx="8" fill="#dff2f8" stroke="#12396b"/>
+  <use href="#icono" x="716" y="328"/>
+  <text x="532" y="342" font-weight="600" fill="#12396b">RepositoriosContext</text>
+  <text x="532" y="362" font-size="11" fill="#1b2433">Inyección de dependencias</text>
+  <text x="532" y="378" font-size="11" fill="#1b2433">de los repositorios</text>
+
+  <!-- Dominio -->
+  <rect x="60" y="445" width="330" height="170" rx="10" fill="#ffffff" stroke="#1aa3c8" stroke-width="1.5"/>
+  <text x="76" y="466" font-weight="700" fill="#1aa3c8">Dominio (domain/) · sin dependencias externas</text>
+  <text x="80" y="492" fill="#1b2433">• catalogo: 5 áreas, 39 enunciados (17.2–17.4)</text>
+  <text x="80" y="514" fill="#1b2433">• cumplimiento: % por área y general,</text>
+  <text x="92" y="530" fill="#1b2433">niveles 80/60, condición de lanzamiento,</text>
+  <text x="92" y="546" fill="#1b2433">plan de trabajo</text>
+  <text x="80" y="568" fill="#1b2433">• evaluacionFactory «Factory»</text>
+  <text x="80" y="590" fill="#1b2433">• indicadores: metas 19.2, alertas 19.3</text>
+
+  <!-- Datos -->
+  <rect x="420" y="445" width="340" height="270" rx="10" fill="#ffffff" stroke="#1aa3c8" stroke-width="1.5"/>
+  <text x="436" y="466" font-weight="700" fill="#1aa3c8">Infraestructura (data/)</text>
+  <rect x="440" y="480" width="300" height="70" rx="8" fill="#fff" stroke="#12396b" stroke-dasharray="5 3"/>
+  <text x="452" y="502" font-weight="600" fill="#12396b">«interface» EvaluacionRepository</text>
+  <text x="452" y="522" font-weight="600" fill="#12396b">«interface» IndicadorRepository</text>
+  <text x="452" y="540" font-size="11" fill="#5d6b7e">«Repository»</text>
+
+  <rect x="440" y="575" width="300" height="56" rx="8" fill="#dff2f8" stroke="#12396b"/>
+  <use href="#icono" x="716" y="583"/>
+  <text x="452" y="597" font-weight="600" fill="#12396b">Firestore*Repository</text>
+  <text x="452" y="616" font-size="11" fill="#1b2433">Implementaciones con onSnapshot / updateDoc</text>
+
+  <rect x="440" y="650" width="300" height="50" rx="8" fill="#dff2f8" stroke="#12396b"/>
+  <use href="#icono" x="716" y="658"/>
+  <text x="452" y="672" font-weight="600" fill="#12396b">firebase.ts «Singleton»</text>
+  <text x="452" y="690" font-size="11" fill="#1b2433">App, Auth y Firestore únicos</text>
+
+  <!-- Nube -->
+  <rect x="830" y="380" width="240" height="330" rx="14" fill="#fff8ec" stroke="#a86400" stroke-width="2"/>
+  <text x="846" y="406" font-weight="700" fill="#a86400">«nube» Google Firebase</text>
+  <rect x="850" y="430" width="200" height="80" rx="8" fill="#fff" stroke="#a86400"/>
+  <text x="862" y="456" font-weight="600" fill="#1b2433">Firebase Authentication</text>
+  <text x="862" y="476" font-size="11" fill="#1b2433">Correo y contraseña</text>
+  <rect x="850" y="530" width="200" height="160" rx="8" fill="#fff" stroke="#a86400"/>
+  <text x="862" y="556" font-weight="600" fill="#1b2433">Cloud Firestore</text>
+  <text x="862" y="578" font-size="11" fill="#1b2433">evaluaciones/{id}</text>
+  <text x="872" y="594" font-size="11" fill="#5d6b7e">respuestas{39}: estado,</text>
+  <text x="872" y="608" font-size="11" fill="#5d6b7e">evidencia, acción correctiva</text>
+  <text x="862" y="630" font-size="11" fill="#1b2433">indicadores/{AAAA-MM}</text>
+  <text x="862" y="660" font-size="11" fill="#1b2433">Reglas: solo usuarios</text>
+  <text x="862" y="676" font-size="11" fill="#1b2433">autenticados</text>
+
+  <!-- Dependencias -->
+  <g stroke="#12396b" stroke-width="1.5" fill="none" marker-end="url(#a)" stroke-dasharray="6 4">
+    <path d="M 180 236 L 180 320"/>
+    <path d="M 240 236 L 380 320"/>
+    <path d="M 280 210 L 300 210"/>
+    <path d="M 520 190 L 500 190" />
+    <path d="M 150 236 C 120 300 120 420 160 445"/>
+    <path d="M 500 360 L 520 360"/>
+    <path d="M 630 400 L 630 480"/>
+    <path d="M 400 400 L 260 445"/>
+    <path d="M 590 550 L 590 575" marker-end="url(#b)" stroke-dasharray="0"/>
+    <path d="M 590 631 L 590 650"/>
+    <path d="M 180 400 C 300 430 380 640 440 675"/>
+    <path d="M 740 675 C 790 675 800 600 850 600"/>
+    <path d="M 740 690 C 800 700 790 470 850 470"/>
+  </g>
+  <text x="790" y="574" font-size="11" fill="#5d6b7e">HTTPS</text>
+  <text x="550" y="752" text-anchor="middle" font-size="11" fill="#5d6b7e">Flechas punteadas: «usa». Flecha con punta blanca: «implementa». La UI depende de interfaces, no de Firestore.</text>
+</svg>

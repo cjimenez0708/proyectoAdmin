@@ -1,0 +1,40 @@
+rules_version = '2';
+
+// Reglas de seguridad de Cloud Firestore para la herramienta Spa Visual.
+// Solo usuarios autenticados (cuentas creadas en Firebase Authentication) leen y escriben.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function autenticado() {
+      return request.auth != null;
+    }
+
+    // evaluaciones/{id}: una aplicación de la herramienta de verificación (39 enunciados)
+    match /evaluaciones/{id} {
+      allow read: if autenticado();
+      allow create: if autenticado()
+        && request.resource.data.etapa in ['preparacion', 'prelanzamiento', 'trimestral']
+        && request.resource.data.nombre is string
+        && request.resource.data.fecha is string
+        && request.resource.data.respuestas is map
+        && request.resource.data.respuestas.size() == 39;
+      allow update: if autenticado()
+        && request.resource.data.etapa == resource.data.etapa
+        && request.resource.data.respuestas.size() == 39;
+      allow delete: if autenticado();
+    }
+
+    // indicadores/{AAAA-MM}: registro mensual de indicadores de seguimiento
+    match /indicadores/{mes} {
+      allow read, delete: if autenticado();
+      allow create, update: if autenticado()
+        && mes.matches('^[0-9]{4}-[0-9]{2}$')
+        && request.resource.data.mes == mes;
+    }
+
+    // Todo lo demás queda bloqueado.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
