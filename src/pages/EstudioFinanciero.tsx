@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { colones } from '../components/ui';
 import { FINANCIERO } from '../content/documento';
+import { AZUL, BarrasSvg, NARANJA } from '../components/BarrasSvg';
 import {
   calcularFinanzas,
   escenarios,
-  ORIGEN,
   SUPUESTOS_DOCUMENTO,
   viabilidad,
   type SupuestosFinancieros,
@@ -25,7 +25,8 @@ function cargar(): SupuestosFinancieros {
 
 const fmtPct = (v: number | null, d = 1) => (v === null || !isFinite(v) ? '—' : `${v.toLocaleString('es-CR', { maximumFractionDigits: d })} %`);
 const fmtNum = (v: number, d = 0) => (isFinite(v) ? v.toLocaleString('es-CR', { maximumFractionDigits: d }) : '—');
-const millones = (v: number) => `${v < 0 ? '−' : ''}₡${(Math.abs(v) / 1_000_000).toLocaleString('es-CR', { maximumFractionDigits: 1 })} M`;
+const millones = (v: number) =>
+  `${v < 0 ? '−' : ''}₡${(Math.abs(v) / 1_000_000).toLocaleString('es-CR', { maximumFractionDigits: Math.abs(v) < 10_000_000 ? 2 : 1 })} M`;
 /** Monto en colones con signo "−" delante del símbolo cuando es negativo. */
 const monto = (v: number) => (v < 0 ? `−${colones(Math.round(-v))}` : colones(Math.round(v)));
 
@@ -48,12 +49,7 @@ export function EstudioFinanciero() {
 
   const campo = (k: CampoNum, label: string, step = 1, nota?: string) => (
     <label className="field" key={k}>
-      <span>
-        {label}{' '}
-        <span className={`badge ${ORIGEN[k] === 'documento' ? 'neutral' : 'warn'}`} style={{ fontSize: '0.68rem', padding: '1px 6px' }}>
-          {ORIGEN[k] === 'documento' ? 'documento' : 'supuesto'}
-        </span>
-      </span>
+      {label}
       <input
         className="input"
         type="number"
@@ -70,8 +66,8 @@ export function EstudioFinanciero() {
   return (
     <>
       <div className="notice" style={{ marginBottom: 16 }}>
-        Modifique cualquier valor y los resultados se recalculan al instante. Los valores marcados como <b>documento</b> provienen de los estudios del
-        proyecto; los marcados como <b>supuesto</b> no están definidos en el estudio preliminar y pueden ajustarse.
+        Los valores iniciales provienen de los estudios técnico, organizacional y financiero del proyecto. Modifique cualquier supuesto y los
+        resultados se recalculan al instante.
       </div>
 
       <div className="grid" style={{ gridTemplateColumns: 'minmax(min(320px, 100%), 380px) 1fr', alignItems: 'start' }}>
@@ -81,7 +77,7 @@ export function EstudioFinanciero() {
             <div className="card-head" style={{ marginBottom: 8 }}>
               <h3>Supuestos</h3>
               <button className="btn secondary" style={{ padding: '4px 10px' }} onClick={() => setS(structuredClone(SUPUESTOS_DOCUMENTO))}>
-                Restablecer valores del documento
+                Restablecer valores base
               </button>
             </div>
             <h3 className="small" style={{ marginBottom: 6 }}>Inversión inicial (₡)</h3>
@@ -193,6 +189,48 @@ export function EstudioFinanciero() {
             </ul>
           </div>
 
+          <div className="card" style={{ margin: 0 }}>
+            <h3>Ingresos y costos mensuales</h3>
+            <p className="small muted" style={{ marginBottom: 8 }}>
+              La diferencia entre ambas barras es el flujo mensual del spa en cada etapa.
+            </p>
+            <BarrasSvg
+              etiqueta="Ingresos y costos mensuales en el año 1 y desde el año 2"
+              categorias={[`Año 1 (${fmtPct(s.ocupacionAnio1, 0)} de ocupación)`, `Desde año 2 (${fmtPct(s.ocupacionDesdeAnio2, 0)})`]}
+              series={[
+                { nombre: 'Ingresos', color: AZUL, valores: [r.anio1.ingresos, r.desdeAnio2.ingresos] },
+                {
+                  nombre: 'Costos totales',
+                  color: NARANJA,
+                  valores: [r.anio1.costosVariables + r.costosFijosMes, r.desdeAnio2.costosVariables + r.costosFijosMes],
+                },
+              ]}
+              formato={millones}
+            />
+          </div>
+
+          <div className="card" style={{ margin: 0 }}>
+            <h3>Flujo de caja acumulado</h3>
+            <p className="small muted" style={{ marginBottom: 8 }}>
+              {r.recuperacion === null
+                ? 'Con estos supuestos, la inversión no se recupera dentro del horizonte.'
+                : `La inversión se recupera en ${fmtNum(r.recuperacion, 1)} años, cuando el acumulado pasa a positivo.`}
+            </p>
+            <BarrasSvg
+              etiqueta="Flujo de caja acumulado por año"
+              categorias={['Año 0', ...r.flujosAnuales.map((_, i) => `Año ${i + 1}`)]}
+              series={[
+                {
+                  nombre: 'Acumulado',
+                  color: AZUL,
+                  valores: r.flujosAnuales.reduce((acc, f) => [...acc, acc[acc.length - 1] + f], [-r.inversionTotal]),
+                },
+              ]}
+              formato={millones}
+              porSigno
+            />
+          </div>
+
           <div className="card table-wrap" style={{ margin: 0 }}>
             <h3 style={{ marginBottom: 8 }}>Resultado mensual</h3>
             <table>
@@ -282,6 +320,17 @@ export function EstudioFinanciero() {
 
           <div className="card table-wrap" style={{ margin: 0 }}>
             <h3 style={{ marginBottom: 8 }}>Escenarios</h3>
+            <BarrasSvg
+              etiqueta="VAN por escenario"
+              categorias={esc.map((e) => `${e.nombre} (${e.o1} % / ${e.o2} %)`)}
+              series={[{ nombre: 'VAN', color: AZUL, valores: esc.map((e) => e.r.van) }]}
+              formato={millones}
+              porSigno
+              alto={200}
+            />
+            <p className="small muted" style={{ margin: '4px 0 10px' }}>
+              VAN de cada escenario: ±15 puntos de ocupación respecto al esperado.
+            </p>
             <table>
               <thead>
                 <tr>
