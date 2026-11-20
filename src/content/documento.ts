@@ -81,13 +81,13 @@ export const PROYECTO = {
     },
   ],
   objetivoGeneral:
-    'Gestionar la introducción del nuevo servicio Spa Visual de la Clínica Preventiva Visual, a partir del análisis de las necesidades, hábitos e interés de clientes actuales y potenciales en servicios para el cuidado del ojo seco, orzuelos y cansancio visual, durante el segundo semestre de 2026.',
+    'Plantear la propuesta de la gestión de mercadeo para la creación de un nuevo servicio de Spa Visual en la Clínica Preventiva Visual, a partir del análisis de las necesidades, hábitos e interés de clientes actuales y potenciales en servicios para el cuidado del ojo seco, orzuelos y cansancio visual, para el segundo semestre de 2026.',
   objetivosEspecificos: [
-    'Identificar las principales necesidades, molestias y hábitos relacionados con el cuidado visual de los clientes actuales y potenciales.',
-    'Determinar el nivel de conocimiento, interés y disposición de los clientes hacia Spa Visual y sus tratamientos.',
-    'Caracterizar los segmentos de clientes con mayor potencial para adquirir los servicios de Spa Visual.',
-    'Definir las acciones de mercadeo requeridas para la introducción y el posicionamiento inicial de Spa Visual.',
-    'Establecer un plan de implementación y seguimiento de las acciones de mercadeo definidas.',
+    'Identificar los elementos que deben considerarse para la implementación del servicio Spa Visual, incluyendo aspectos relacionados con el mercado, clientes, recursos y capacidades internas de la clínica.',
+    'Analizar las condiciones actuales de Clínica Preventiva Visual y los requerimientos necesarios para la implementación del nuevo servicio Spa Visual.',
+    'Diseñar una herramienta de apoyo que permita a Clínica Preventiva Visual guiar, verificar y dar seguimiento al proceso de implementación del servicio Spa Visual.',
+    'Definir las acciones de mercadeo requeridas para apoyar la introducción y posicionamiento inicial de Spa Visual.',
+    'Establecer los criterios de implementación y seguimiento que permitan a Clínica Preventiva Visual evaluar la ejecución futura del servicio Spa Visual.',
   ],
   oportunidades: [
     'Atender molestias visuales frecuentes derivadas del uso intensivo de dispositivos electrónicos.',
