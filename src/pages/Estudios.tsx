@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { colones, GraficoBarras, Lista, PageHead, Tabs } from '../components/ui';
-import { AMBIENTAL, FINANCIERO, LEGAL, MERCADO, ORGANIZACIONAL, TECNICO } from '../content/documento';
+import { AMBIENTAL, LEGAL, MERCADO, ORGANIZACIONAL, TECNICO } from '../content/documento';
+import { EstudioFinanciero } from './EstudioFinanciero';
 
 type Tab = 'mercado' | 'tecnico' | 'organizacional' | 'legal' | 'financiero';
 
@@ -24,7 +25,7 @@ export function Estudios() {
       {tab === 'tecnico' && <Tecnico />}
       {tab === 'organizacional' && <Organizacional />}
       {tab === 'legal' && <Legal />}
-      {tab === 'financiero' && <Financiero />}
+      {tab === 'financiero' && <EstudioFinanciero />}
     </>
   );
 }
@@ -374,64 +375,5 @@ function Legal() {
         </table>
       </div>
     </>
-  );
-}
-
-function Financiero() {
-  return (
-    <div className="grid grid-2">
-      <div className="card table-wrap">
-        <h2>Estimación inicial de inversión</h2>
-        <table className="section-gap">
-          <tbody>
-            {FINANCIERO.inversion.map(([c, m]) => (
-              <tr key={c}>
-                <td>{c}</td>
-                <td className="num">{m === null ? <span className="muted">Incluido en adecuación</span> : colones(m)}</td>
-              </tr>
-            ))}
-            <tr>
-              <td>Subtotal</td>
-              <td className="num">{colones(FINANCIERO.subtotal)}</td>
-            </tr>
-            <tr>
-              <td>Reserva para imprevistos (10 %)</td>
-              <td className="num">{colones(FINANCIERO.imprevistos)}</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>Inversión inicial estimada</td>
-              <td className="num">{colones(FINANCIERO.total)}</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-      <div className="card table-wrap stack">
-        <h2>Costos variables por sesión</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Servicio</th>
-              <th className="num">Insumos</th>
-              <th className="num">Otros</th>
-              <th className="num">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {FINANCIERO.costosVariables.map(([s, i, o, t]) => (
-              <tr key={s}>
-                <td>{s}</td>
-                <td className="num">{colones(i)}</td>
-                <td className="num">{colones(o)}</td>
-                <td className="num">{colones(t)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <p className="small muted">{FINANCIERO.notaVariables}</p>
-        <div className="notice warn small">{FINANCIERO.conclusion}</div>
-      </div>
-    </div>
   );
 }

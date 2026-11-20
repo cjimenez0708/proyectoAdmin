@@ -4,6 +4,7 @@ import { calcularResultado, clasificarNivel, listaParaLanzamiento, planDeTrabajo
 import { crearEvaluacion } from './evaluacionFactory';
 import { alertasConsecutivas, calcularIndicadores, registroVacio } from './indicadores';
 import type { Evaluacion, Respuesta } from './types';
+import { calcularFinanzas, escenarios, SUPUESTOS_DOCUMENTO } from './finanzas';
 import { correoAUsuario, usuarioACorreo, validarClave, validarPerfil, validarUsuario } from './usuario';
 
 const todas = (estado: Respuesta['estado']) =>
@@ -94,6 +95,33 @@ describe('usuario y contraseña', () => {
     expect(validarUsuario('María')).not.toBeNull();
     expect(validarUsuario('  Secretaria ')).toBeNull();
     expect(correoAUsuario(usuarioACorreo('  Secretaria '))).toBe('secretaria');
+  });
+});
+
+describe('estudio financiero', () => {
+  it('con los valores del documento reproduce inversión, capacidad y precio', () => {
+    const r = calcularFinanzas(SUPUESTOS_DOCUMENTO);
+    expect(r.inversionTotal).toBeCloseTo(15_762_230, 0);
+    expect(r.capacidadMes).toBe(88); // 4 sesiones × 22 días
+    expect(r.precioNeto).toBeCloseTo(20_125, 0); // (75 % × 17 500 + 25 % × 35 000) × 0,92
+    expect(r.anio1.flujo).toBeGreaterThan(0);
+    expect(r.van).toBeGreaterThan(0);
+    expect(r.tir).not.toBeNull();
+  });
+
+  it('incluir salarios cambia el resultado a pérdida en el primer año', () => {
+    const r = calcularFinanzas({ ...SUPUESTOS_DOCUMENTO, incluirSalarios: true });
+    expect(r.costosFijosMes).toBe(97_103 + 1_299_090);
+    expect(r.anio1.flujo).toBeLessThan(0);
+  });
+
+  it('la TIR hace el VAN cero y los escenarios ordenan el VAN', () => {
+    const r = calcularFinanzas(SUPUESTOS_DOCUMENTO);
+    const conTir = calcularFinanzas({ ...SUPUESTOS_DOCUMENTO, tasaDescuento: r.tir! });
+    expect(Math.abs(conTir.van)).toBeLessThan(1);
+    const [p, e, o] = escenarios(SUPUESTOS_DOCUMENTO);
+    expect(p.r.van).toBeLessThan(e.r.van);
+    expect(e.r.van).toBeLessThan(o.r.van);
   });
 });
 
